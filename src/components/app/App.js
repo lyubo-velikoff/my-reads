@@ -6,7 +6,7 @@ import SearchBooks from '../books/Search'
 import '../../assets/css/App.css'
 
 class App extends React.Component {
-  
+
   state = {
     books: [],
     shelfs: [
@@ -54,6 +54,16 @@ class App extends React.Component {
     })
   }
 
+  handleShelfChange = (book, shelf) => {
+    BooksAPI.update(book, shelf.target.value).then(() => {
+      // let newBook = this.state.books.filter((b) => b.id == book.id)
+      // newBook[0].shelf = shelf
+      // this.setState((state) => ({
+      //   books: state.books.filter((b) => b.id )
+      // }))
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -61,6 +71,7 @@ class App extends React.Component {
           <ListBooks 
             books={this.state.books}
             shelfs={this.state.shelfs}
+            onChangeShelf={this.handleShelfChange}
           />
         )} />
 
