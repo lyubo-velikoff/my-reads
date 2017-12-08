@@ -1,26 +1,26 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Shelfs from './Shelfs'
+import Shelves from './Shelves'
 
 class List extends Component {
 
   static propTypes = {
     books: PropTypes.array.isRequired,
-    shelfs: PropTypes.array.isRequired,
+    shelves: PropTypes.array.isRequired,
     onChangeShelf: PropTypes.func.isRequired,
   }
 
   render() {
-    const { shelfs, onChangeShelf } = this.props
+    const { shelves, onChangeShelf } = this.props
     return (
       <div className="list-books">
         <div className="list-books-title">
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          <Shelfs 
-            shelfs={shelfs}
+          <Shelves 
+            shelves={shelves}
             onChangeShelf={onChangeShelf} 
           />
         </div>

@@ -5,12 +5,12 @@ class Books extends Component {
   
   static propTypes = {
     books: PropTypes.array.isRequired,
-    shelfs: PropTypes.array.isRequired,
+    shelves: PropTypes.array.isRequired,
     onChangeShelf: PropTypes.func.isRequired,
   }
 
   render() {
-    const { books, shelfs, onChangeShelf } = this.props
+    const { books, shelves, onChangeShelf } = this.props
     return (
       <ol className="books-grid">
         {books.map((book) => (
@@ -21,7 +21,7 @@ class Books extends Component {
                 <div className="book-shelf-changer">
                   <select value={book.shelf} onChange={onChangeShelf.bind(this, book)}>
                     <option value="none" disabled>Move to...</option>
-                    {shelfs.map((shelf, index) => (
+                    {shelves.map((shelf, index) => (
                       <option value={shelf.id} key={index}>{shelf.name}</option>
                     ))}
                     <option value="none">None</option>

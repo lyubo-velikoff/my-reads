@@ -2,24 +2,24 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Books from './Books'
 
-class Shelfs extends Component {
+class Shelves extends Component {
 
   static propTypes = {
-    shelfs: PropTypes.array.isRequired,
+    shelves: PropTypes.array.isRequired,
     onChangeShelf: PropTypes.func.isRequired,
   }
 
   render() {
-    const { shelfs, onChangeShelf } = this.props
+    const { shelves, onChangeShelf } = this.props
     return (
       <div>
-        {shelfs.map(shelf => (
+        {shelves.map(shelf => (
           <div className="bookshelf" key={shelf.id}>
             <h2 className="bookshelf-title">{shelf.name}</h2>
             <div className="bookshelf-books">
               <Books 
                 books={shelf.books}
-                shelfs={shelfs}
+                shelves={shelves}
                 onChangeShelf={onChangeShelf}
               />
             </div>
@@ -31,5 +31,5 @@ class Shelfs extends Component {
 
 }
 
-export default Shelfs
+export default Shelves
 
