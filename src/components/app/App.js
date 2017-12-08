@@ -8,48 +8,12 @@ import '../../assets/css/App.css'
 class App extends React.Component {
 
   state = {
-    books: [],
-    shelves: [
-      {
-        "id": "currentlyReading",
-        "name": "Currently Reading",
-        "books": []
-      },
-      {
-        "id": "wantToRead",
-        "name": "Want to Read",
-        "books": []
-      },
-      {
-        "id": "read",
-        "name": "Read",
-        "books": []
-      },
-    ]
+    books: []
   }
   
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      this.setState({ 
-        books: books,
-        shelves: [
-          {
-            "id": "currentlyReading",
-            "name": "Currently Reading",
-            "books": books.filter((book) => book.shelf === "currentlyReading")
-          },
-          {
-            "id": "wantToRead",
-            "name": "Want to Read",
-            "books": books.filter((book) => book.shelf === "wantToRead")
-          },
-          {
-            "id": "read",
-            "name": "Read",
-            "books": books.filter((book) => book.shelf === "read")
-          },
-        ]
-      })
+      this.setState({ books: books })
       console.log(books)
     })
   }
@@ -65,12 +29,19 @@ class App extends React.Component {
   }
 
   render() {
+
+    const shelves = [
+      {'id': 'currentlyReading', 'name': 'Currently Reading'},      
+      {'id': 'wantToRead', 'name': 'Want to Read'},
+      {'id': 'read', 'name': 'Read'},
+    ]
+
     return (
-      <div className="app">
+      <div className='app'>
         <Route exact path='/' render={() => (
           <ListBooks 
             books={this.state.books}
-            shelves={this.state.shelves}
+            shelves={shelves}
             onChangeShelf={this.handleShelfChange}
           />
         )} />

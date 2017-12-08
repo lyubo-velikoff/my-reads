@@ -12,7 +12,7 @@ class List extends Component {
   }
 
   render() {
-    const { shelves, onChangeShelf } = this.props
+    const { books, shelves, onChangeShelf } = this.props
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -20,15 +20,13 @@ class List extends Component {
         </div>
         <div className="list-books-content">
           <Shelves 
+            books={books}
             shelves={shelves}
             onChangeShelf={onChangeShelf} 
           />
         </div>
         <div className="open-search">
-          <Link
-            to='/search'
-          >Add a book
-          </Link> 
+          <Link to='/search'>Add a book</Link> 
         </div>
       </div>
     )
