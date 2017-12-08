@@ -19,12 +19,11 @@ class App extends React.Component {
   }
 
   handleShelfChange = (book, shelf) => {
+    book.shelf = shelf.target.value
     BooksAPI.update(book, shelf.target.value).then(() => {
-      // let newBook = this.state.books.filter((b) => b.id == book.id)
-      // newBook[0].shelf = shelf
-      // this.setState((state) => ({
-      //   books: state.books.filter((b) => b.id )
-      // }))
+      this.setState((state) => ({
+        books: state.books.filter((b) => b.id !== book.id).concat([ book ])
+      }))
     })
   }
 
