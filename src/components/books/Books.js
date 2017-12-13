@@ -26,7 +26,7 @@ class Books extends Component {
                   } }>
                 </div>
                 <div className="book-shelf-changer">
-                  <select value={book.shelf} onChange={onChangeShelf.bind(this, book)}>
+                  <select value={book.shelf ? book.shelf : 'none'} onChange={onChangeShelf.bind(this, book)}>
                     <option value="none" disabled>Move to...</option>
                     {shelves.map((shelf, index) => (
                       <option value={shelf.id} key={index}>{shelf.name}</option>
