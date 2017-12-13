@@ -22,7 +22,6 @@ class Books extends Component {
                   style={{ 
                     width: 128, 
                     height: 193, 
-                    // backgroundImage: 'url("' + book.imageLinks.smallThumbnail ? book.imageLinks.smallThumbnail : '/assets/images/book_placeholder.png' + '")' 
                     backgroundImage: `url(${book.imageLinks && book.imageLinks.smallThumbnail ? book.imageLinks.smallThumbnail : ''})`
                   } }>
                 </div>
