@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import * as BooksAPI from '../../utils/BooksAPI'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import escapeRegExp from 'escape-string-regexp'
 import Books from './Books'
 
+const WAIT_INTERVAL = 500
+const ENTER_KEY = 13
 const searchTerms = ['Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS']
 
 class Search extends Component {
@@ -18,26 +21,40 @@ class Search extends Component {
     books: []
   }
 
-  handleTerm = (term) => {
-    return searchTerms.filter((t) => t.includes(term)).length > 0 ? true : false
+  componentWillMount() {
+    this.timer = null
   }
 
-  updateQuery = (query) => {
+  handleTerm = () => {
+    const match = new RegExp(escapeRegExp(this.state.query), 'i')
+    return searchTerms.filter((term) => match.test(term)).length > 0 ? true : false
+  }
+
+  updateQuery = (query) => { 
+    clearTimeout(this.timer)
     this.setState({ query: query, books: [] })
-    if (query !== '' && this.handleTerm(query) ) {
-      BooksAPI.search(query).then((books) => {
-        console.log(books)
+    this.timer = setTimeout(this.searchBooks, WAIT_INTERVAL)
+  }
+
+  searchBooks = () => {
+    if (this.state.query !== '' && this.handleTerm()) {
+      BooksAPI.search(this.state.query).then((books) => {
         this.setState({
           query: this.state.query,
           books: books
         })
       })
     }
-
   }
 
   clearQuery = () => {
     this.setState({ query: '', books: [] })
+  }
+
+  handleKeyDown(e) {
+    if (e.keyCode === ENTER_KEY) {
+      this.searchBooks()
+    }
   }
 
   render() {
@@ -65,6 +82,7 @@ class Search extends Component {
               placeholder="Search by title or author"
               value={query}
               onChange={(event) => this.updateQuery(event.target.value)}
+              onKeyDown={this.handleKeyDown.bind(this)}
             />
           </div>
         </div>

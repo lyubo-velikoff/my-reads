@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import * as BooksAPI from '../../utils/BooksAPI'
 import { Route } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
@@ -6,8 +6,7 @@ import ListBooks from '../books/List'
 import SearchBooks from '../books/Search'
 import '../../assets/css/App.css'
 
-class App extends React.Component {
-
+class App extends Component {
   state = {
     books: []
   }
