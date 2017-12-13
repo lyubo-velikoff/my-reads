@@ -1,6 +1,7 @@
 import React from 'react'
 import * as BooksAPI from '../../utils/BooksAPI'
 import { Route } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
 import ListBooks from '../books/List'
 import SearchBooks from '../books/Search'
 import '../../assets/css/App.css'
@@ -23,6 +24,9 @@ class App extends React.Component {
       this.setState((state) => ({
         books: state.books.filter((b) => b.id !== book.id).concat([ book ])
       }))
+      toast("Successfully updated shelf", {
+        position: toast.POSITION.TOP_RIGHT
+      })
     })
   }
 
@@ -36,6 +40,8 @@ class App extends React.Component {
 
     return (
       <div className='app'>
+        <ToastContainer />
+
         <Route exact path='/' render={() => (
           <ListBooks
             books={this.state.books}
