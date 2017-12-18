@@ -23,8 +23,8 @@ class App extends Component {
       this.setState((state) => ({
         books: state.books.filter((b) => b.id !== book.id).concat([ book ])
       }))
-      toast("Successfully updated shelf", {
-        position: toast.POSITION.TOP_RIGHT
+      toast('Successfully updated shelf', {
+        position: toast.POSITION.TOP_RIGHT,
       })
     })
   }
@@ -39,7 +39,7 @@ class App extends Component {
 
     return (
       <div className='app'>
-        <ToastContainer />
+        <ToastContainer autoClose={3000} />
 
         <Route exact path='/' render={() => (
           <ListBooks
