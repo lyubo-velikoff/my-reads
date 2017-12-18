@@ -52,6 +52,7 @@ class App extends Component {
         <Route path='/search' render={() => (
           <SearchBooks 
             shelves={shelves}
+            rootBooks={this.state.books}
             onChangeShelf={this.handleShelfChange}
           />
         )} />
