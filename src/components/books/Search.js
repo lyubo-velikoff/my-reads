@@ -40,12 +40,14 @@ class Search extends Component {
   searchBooks = () => {
     if (this.state.query !== '' && this.handleTerm()) {
       BooksAPI.search(this.state.query).then((books) => {
-        books.forEach(book => {
-          let existingBook = this.props.rootBooks.filter((rootBook) => rootBook.id === book.id)
-          if (existingBook.length > 0) {
-            book.shelf = existingBook[0].shelf
-          }
-        })
+        if (books.length > 0) {
+          books.forEach(book => {
+            let existingBook = this.props.rootBooks.filter((rootBook) => rootBook.id === book.id)
+            if (existingBook.length > 0) {
+              book.shelf = existingBook[0].shelf
+            }
+          })
+        }
         this.setState({
           query: this.state.query,
           books: books
