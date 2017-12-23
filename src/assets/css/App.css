@@ -122,9 +122,22 @@ body, .app {
 .book {
   width: 140px;
 }
+@media (min-width: 600px) {
+  .books-grid li {
+    transition-duration: .3s;    
+  }
+  .books-grid li:hover {
+    transform: translate(0, -20px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);    
+  }
+  .book:hover .book-shelf-changer {
+    opacity: 1;
+  }
+}
 .book-title,
 .book-authors {
   font-size: 0.8em;
+  cursor: pointer;
 }
 .book-title {
   margin-top: 10px;
@@ -141,6 +154,7 @@ body, .app {
 }
 
 .book-shelf-changer {
+  opacity: 0;
   position: absolute;
   right: 0;
   bottom: -10px;
@@ -166,9 +180,20 @@ body, .app {
 .book-cover {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: #eee;
+  cursor: pointer;
 }
 .book-cover-title {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+.book-single-cover {
+  width:  300px;
+  height: auto;
+}
+
+/* modal styles */
+
+.ReactModal__Overlay {
+  z-index: 5;
 }

@@ -14,7 +14,8 @@ class Search extends Component {
   static propTypes = {
     shelves: PropTypes.array.isRequired,
     rootBooks: PropTypes.array.isRequired,
-    onChangeShelf: PropTypes.func.isRequired,    
+    onChangeShelf: PropTypes.func.isRequired,
+    handleOpenModal: PropTypes.func.isRequired,    
   }
 
   state = {
@@ -67,7 +68,7 @@ class Search extends Component {
   }
 
   render() {
-    const { shelves, onChangeShelf } = this.props
+    const { shelves, onChangeShelf, handleOpenModal } = this.props
     const { query, books } = this.state
     return (
       <div className="search-books">
@@ -94,6 +95,7 @@ class Search extends Component {
               books={books}
               shelves={shelves}
               onChangeShelf={onChangeShelf}
+              handleOpenModal={handleOpenModal}
             />
             <button onClick={this.clearQuery}>Reset</button>
           </div>

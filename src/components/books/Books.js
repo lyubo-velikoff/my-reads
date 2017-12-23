@@ -7,10 +7,11 @@ class Books extends Component {
     books: PropTypes.array.isRequired,
     shelves: PropTypes.array.isRequired,
     onChangeShelf: PropTypes.func.isRequired,
+    handleOpenModal: PropTypes.func.isRequired,
   }
-
+  
   render() {
-    const { books, shelves, onChangeShelf } = this.props
+    const { books, shelves, onChangeShelf, handleOpenModal } = this.props
     return (
       <ol className="books-grid">
         {books.map((book) => (
@@ -18,7 +19,8 @@ class Books extends Component {
             <div className="book">
               <div className="book-top">
                 <div 
-                  className="book-cover" 
+                  onClick={handleOpenModal.bind(this, book)}
+                  className="book-cover"
                   style={{ 
                     width: 128, 
                     height: 193, 
@@ -35,8 +37,8 @@ class Books extends Component {
                   </select>
                 </div>
               </div>
-              <div className="book-title">{book.title ? book.title :  'No title'}</div>
-              <div className="book-authors">{book.authors ? book.authors.join(', ') :  ''}</div>
+              <div className="book-title" onClick={handleOpenModal.bind(this, book)}>{book.title ? book.title :  'No title'}</div>
+              <div className="book-authors" onClick={handleOpenModal.bind(this, book)}>{book.authors ? book.authors.join(', ') :  ''}</div>
             </div>
           </li>
         ))}

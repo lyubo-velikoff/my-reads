@@ -9,10 +9,11 @@ class List extends Component {
     books: PropTypes.array.isRequired,
     shelves: PropTypes.array.isRequired,
     onChangeShelf: PropTypes.func.isRequired,
+    handleOpenModal: PropTypes.func.isRequired,
   }
 
   render() {
-    const { books, shelves, onChangeShelf } = this.props
+    const { books, shelves, onChangeShelf, handleOpenModal } = this.props
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -22,7 +23,8 @@ class List extends Component {
           <Shelves 
             books={books}
             shelves={shelves}
-            onChangeShelf={onChangeShelf} 
+            onChangeShelf={onChangeShelf}
+            handleOpenModal={handleOpenModal}
           />
         </div>
         <div className="open-search">
